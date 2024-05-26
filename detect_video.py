@@ -24,7 +24,7 @@ Banner = ["<img src='download.png' alt='Trulli' width='1200' height='224'>\n"]
 Form = ["<h1  style='font-family:Montserrat'>Sign Up</h1><form action='/action_page.php'> <label for='fname' style='font-family:Montserrat'>First name: </label><input type='text' id='fname' name='fname'><br><br> <label for='lname'  style='font-family:Montserrat'>Last name: </label><input type='text' id='lname' name='lname'><br><br> <input type='submit' value='Submit' style='font-family:Montserrat'></form> "]
 Logo = ["<img src='Logo.png' alt='Logo' width='550' height='124'>\n"]
 
-def detect_video(save_img=False):
+def detect_video(opt, save_img=False):
     Banner_Count = 0
     Header_Count = 0
     Short_Paragraph_Count = 0
@@ -250,7 +250,7 @@ if __name__ == '__main__':
     with torch.no_grad():
         if opt.update:  # update all models (to fix SourceChangeWarning)
             for opt.weights in ['yolov7.pt']:
-                detect_video()
+                detect_video(opt)
                 strip_optimizer(opt.weights)
         else:
-            detect_video()
+            detect_video(opt)
