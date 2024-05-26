@@ -25,6 +25,16 @@ Form = ["<h1  style='font-family:Montserrat'>Sign Up</h1><form action='/action_p
 Logo = ["<img src='Logo.png' alt='Logo' width='550' height='124'>\n"]
 
 def detect_video(save_img=False):
+    Banner_Count = 0
+    Header_Count = 0
+    Short_Paragraph_Count = 0
+    Long_Paragraph_Count = 0
+    Button_Count = 0
+    Form_Count = 0
+    Logo_Count = 0
+
+    prev_time = 0
+
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
     save_img = not opt.nosave and not source.endswith('.txt')  # save inference images
     is_webcam = source.isnumeric() or source.endswith('.txt') or source.lower().startswith(
@@ -178,8 +188,13 @@ def detect_video(save_img=False):
 
             # Stream results
             if view_img:
+                curr_time = time.time()
+                fps = 1 / (curr_time - prev_time)
+                prev_time = curr_time
+                cv2.putText(im0, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2, cv2.LINE_AA)
                 cv2.imshow(str(p), im0)
-                cv2.waitKey(1)  # 1 millisecond
+                if cv2.waitKey(1) == ord('q'):  # q to quit
+                    raise StopIteration
 
             # Save results (image with detections)
             if save_img:
