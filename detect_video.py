@@ -14,6 +14,16 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 
+###Elements
+Declaration = ["<!DOCTYPE html><html><body>\n"]
+Header = ["<h1 style='font-family:Montserrat'>My First Heading</h1>\n"]
+Short_Paragraph = ["<p style='font-family:Montserrat'>My first paragraph - This is a really cool way to quickly design and build websites...Don't you think?</p>\n"]
+Long_Paragraph = ["<p style='font-family:Montserrat'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n"]
+Button = ["<button type='button' style='font-family:Montserrat'>Click Me!</button>\n"]
+Banner = ["<img src='download.png' alt='Trulli' width='1200' height='224'>\n"]
+Form = ["<h1  style='font-family:Montserrat'>Sign Up</h1><form action='/action_page.php'> <label for='fname' style='font-family:Montserrat'>First name: </label><input type='text' id='fname' name='fname'><br><br> <label for='lname'  style='font-family:Montserrat'>Last name: </label><input type='text' id='lname' name='lname'><br><br> <input type='submit' value='Submit' style='font-family:Montserrat'></form> "]
+Logo = ["<img src='Logo.png' alt='Logo' width='550' height='124'>\n"]
+
 def detect_video(save_img=False):
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
     save_img = not opt.nosave and not source.endswith('.txt')  # save inference images
@@ -129,6 +139,39 @@ def detect_video(save_img=False):
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
+                        ###WEB#ELEMENTS#######################################################################
+                        Element = names[int((cls))]
+                        F = open("devops.html", "a")
+                        if Element == 'banner':
+                            Banner_Count += 1
+                            if Banner_Count == 10:
+                                F.writelines(Banner)
+                        elif Element == 'header':
+                            Header_Count += 1
+                            if Header_Count == 10:
+                                F.writelines(Header)
+                        elif Element == 'button':
+                            Button_Count += 1
+                            if Button_Count == 10:
+                                F.writelines(Button)
+                        elif Element == 'short_paragraph':
+                            Short_Paragraph_Count += 1
+                            if Short_Paragraph_Count == 10:
+                                F.writelines(Short_Paragraph)
+                        elif Element == 'long_paragraph':
+                            Long_Paragraph_Count += 1
+                            if Long_Paragraph_Count == 10:
+                                F.writelines(Long_Paragraph)
+                        elif Element == 'form':
+                            Form_Count += 1
+                            if Form_Count == 10:
+                                F.writelines(Form)
+                        elif Element == 'logo':
+                            Logo_Count += 1
+                            if Logo_Count == 100:
+                                F.writelines(Logo)
+                        F.close()
+                        ######################################################################################
 
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
