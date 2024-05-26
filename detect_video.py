@@ -24,6 +24,8 @@ Banner = ["<img src='download.png' alt='Trulli' width='1200' height='224'>\n"]
 Form = ["<h1  style='font-family:Montserrat'>Sign Up</h1><form action='/action_page.php'> <label for='fname' style='font-family:Montserrat'>First name: </label><input type='text' id='fname' name='fname'><br><br> <label for='lname'  style='font-family:Montserrat'>Last name: </label><input type='text' id='lname' name='lname'><br><br> <input type='submit' value='Submit' style='font-family:Montserrat'></form> "]
 Logo = ["<img src='Logo.png' alt='Logo' width='550' height='124'>\n"]
 
+count_threshold = 3
+
 def detect_video(opt, save_img=False):
     Banner_Count = 0
     Header_Count = 0
@@ -154,31 +156,31 @@ def detect_video(opt, save_img=False):
                         F = open("devops.html", "a")
                         if Element == 'banner':
                             Banner_Count += 1
-                            if Banner_Count == 10:
+                            if Banner_Count == count_threshold:
                                 F.writelines(Banner)
                         elif Element == 'header':
                             Header_Count += 1
-                            if Header_Count == 10:
+                            if Header_Count == count_threshold:
                                 F.writelines(Header)
                         elif Element == 'button':
                             Button_Count += 1
-                            if Button_Count == 10:
+                            if Button_Count == count_threshold:
                                 F.writelines(Button)
                         elif Element == 'short_paragraph':
                             Short_Paragraph_Count += 1
-                            if Short_Paragraph_Count == 10:
+                            if Short_Paragraph_Count == count_threshold:
                                 F.writelines(Short_Paragraph)
                         elif Element == 'long_paragraph':
                             Long_Paragraph_Count += 1
-                            if Long_Paragraph_Count == 10:
+                            if Long_Paragraph_Count == count_threshold:
                                 F.writelines(Long_Paragraph)
                         elif Element == 'form':
                             Form_Count += 1
-                            if Form_Count == 10:
+                            if Form_Count == count_threshold:
                                 F.writelines(Form)
                         elif Element == 'logo':
                             Logo_Count += 1
-                            if Logo_Count == 100:
+                            if Logo_Count == count_threshold:
                                 F.writelines(Logo)
                         F.close()
                         ######################################################################################
